@@ -1,0 +1,40 @@
+﻿<Window x:Class="SendFile.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SendFile"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.8*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Column="0" ItemsSource="{Binding Pictures}"
+                 SelectedItem="{Binding SelectedPicture}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Description}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Image Grid.Column="1"  Source="{Binding SelectedPictureLocalPath, UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Grid.Column="0" Grid.Row="1" DataContext="{Binding UploadPicture}">
+            <TextBlock Text="Создать элемент"  />
+            <TextBlock Text="Описание" />
+            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="1" Name="btnOpenFile" Click="btnOpenFiles_Click">Выбрать картинку</Button>
+    </Grid>
+</Window>
